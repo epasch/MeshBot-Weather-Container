@@ -1,0 +1,59 @@
+name: Fetch Latest Source
+
+on:
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  fetch-source:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Fetch latest source
+      run: |
+        # Create a temporary directory
+        TEMP_DIR=$(mktemp -d)
+        cd "$TEMP_DIR"
+        
+        # Clone the original repository
+        git clone https://github.com/oasis6212/Meshbot_weather.git
+        
+        # Go back to our repository
+        cd ..
+        
+        # Copy the source files
+        cp -r "$TEMP_DIR"/Meshbot_weather/* ./
+        cp "$TEMP_DIR"/Meshbot_weather/.* ./ 2>/dev/null || true
+        
+        # Clean up
+        rm -rf "$TEMP_DIR"
+
+    - name: Check for changes
+      id: check_changes
+      run: |
+        if git diff --quiet; then
+          echo "changes=false" >> $GITHUB_OUTPUT
+        else
+          echo "changes=true" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Create Pull Request
+      if: steps.check_changes.outputs.changes == 'true'
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: 'chore: update source from original repository'
+        title: 'chore: update source from original repository'
+        body: |
+          This PR updates the source code from the original Meshbot_weather repository.
+          
+          Changes were automatically detected and this PR was created by the fetch-source workflow.
+        branch: update-source
+        delete-branch: true 

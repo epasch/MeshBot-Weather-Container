@@ -1,0 +1,26 @@
+# Docker Compose file for MeshbotWeatherContainer
+
+services:
+  meshbot-weather:
+    build: .
+    container_name: meshbot-weather
+    restart: unless-stopped
+    volumes:
+      # Mount the settings file for easy configuration
+      - ./settings.yaml:/app/settings.yaml:ro
+      # Mount any logs directory if needed
+      - ./logs:/app/logs
+    environment:
+      - PYTHONUNBUFFERED=1
+    # If you need to connect to a Meshtastic device via USB
+    # devices:
+    #   - "/dev/ttyUSB0:/dev/ttyUSB0"
+    # If you need to connect to a Meshtastic device via network
+    # ports:
+    #   - "4403:4403"  # Meshtastic default port
+    networks:
+      - meshbot-network
+
+networks:
+  meshbot-network:
+    driver: bridge 

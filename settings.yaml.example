@@ -1,0 +1,47 @@
+# Meshbot Weather Configuration Example
+# Copy this file to settings.yaml and modify with your settings
+
+MYNODES:
+  - "3663493700"
+  - "1234567890"
+
+FIREWALL: false
+DM_MODE: true
+DUTYCYCLE: false
+
+# National Weather Service Settings
+NWS_OFFICE: "LOX" 
+NWS_GRID_X: "155"
+NWS_GRID_Y: "45"
+
+# User Agent for NWS API calls
+USER_AGENT_APP: "myweatherapp" 
+USER_AGENT_EMAIL: "contact@example.com" 
+
+# Alert location coordinates (latitude, longitude)
+ALERT_LAT: "34.0522" 
+ALERT_LON: "-118.2433"
+
+# Timing settings
+ALERT_CHECK_INTERVAL: 300  # 5 minutes
+FIRST_MESSAGE_DELAY: 3 
+MESSAGE_DELAY: 15  
+
+# Alert settings
+ALERT_INCLUDE_DESCRIPTION: false 
+ENABLE_FULL_ALERT_COMMAND: true
+
+# Forecast settings
+ENABLE_7DAY_FORECAST: true  
+ENABLE_5DAY_FORECAST: true  
+ENABLE_HOURLY_WEATHER: true 
+FULL_MENU: true
+
+# Auto-reboot settings
+ENABLE_AUTO_REBOOT: false  
+AUTO_REBOOT_HOUR: 3  
+AUTO_REBOOT_MINUTE: 0  
+REBOOT_DELAY_SECONDS: 10  
+
+# Node shutdown
+SHUTDOWN_NODE_ON_EXIT: false 
