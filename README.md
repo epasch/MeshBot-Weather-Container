@@ -6,8 +6,8 @@ A Docker container for the [Meshbot_weather](https://github.com/oasis6212/Meshbo
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/MeshbotWeatherContainer.git
-cd MeshbotWeatherContainer
+git clone git@github.com:epasch/MeshBot-Weather-Container.git
+cd MeshBot-Weather-Container
 
 # Initial setup (fetches source and creates config)
 make setup
@@ -114,7 +114,7 @@ This container is automatically built and pushed to Docker Hub via GitHub Action
 ### Pull from Docker Hub
 
 ```bash
-docker pull yourusername/meshbot-weather:latest
+docker pull epasch/meshbot-weather:latest
 ```
 
 ## 🔄 Automated Updates
@@ -126,7 +126,7 @@ docker pull yourusername/meshbot-weather:latest
 ## 📁 Project Structure
 
 ```
-MeshbotWeatherContainer/
+MeshBot-Weather-Container/
 ├── Dockerfile              # Container definition
 ├── docker-compose.yml      # Docker Compose configuration
 ├── Makefile               # Build and management commands

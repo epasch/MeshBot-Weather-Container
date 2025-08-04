@@ -1,6 +1,6 @@
 # Deployment Guide
 
-This guide explains how to deploy the MeshbotWeatherContainer to Docker Hub and set up automated builds with GitHub Actions.
+This guide explains how to deploy the MeshBot-Weather-Container to Docker Hub and set up automated builds with GitHub Actions.
 
 ## Prerequisites
 
@@ -15,16 +15,16 @@ This guide explains how to deploy the MeshbotWeatherContainer to Docker Hub and 
 1. **Option A: Fork this repository**
    ```bash
    # Fork the repository on GitHub, then clone
-   git clone https://github.com/yourusername/MeshbotWeatherContainer.git
-   cd MeshbotWeatherContainer
+   git clone git@github.com:epasch/MeshBot-Weather-Container.git
+   cd MeshBot-Weather-Container
    ```
 
 2. **Option B: Create new repository**
    ```bash
    # Clone this repository and change remote
-   git clone https://github.com/original-owner/MeshbotWeatherContainer.git
-   cd MeshbotWeatherContainer
-   git remote set-url origin https://github.com/yourusername/MeshbotWeatherContainer.git
+   git clone git@github.com:epasch/MeshBot-Weather-Container.git
+   cd MeshBot-Weather-Container
+   git remote set-url origin https://github.com/yourusername/MeshBot-Weather-Container.git
    ```
 
 ### Update Repository Name
@@ -35,7 +35,7 @@ Edit the GitHub Actions workflow to use your repository name:
 # In .github/workflows/docker-build.yml
 env:
   REGISTRY: docker.io
-  IMAGE_NAME: yourusername/meshbot-weather  # Change this
+     IMAGE_NAME: epasch/meshbot-weather  # Change this
 ```
 
 ## Step 2: Set Up Docker Hub
@@ -110,10 +110,10 @@ Once the workflow completes, test the image from Docker Hub:
 
 ```bash
 # Pull the image
-docker pull yourusername/meshbot-weather:latest
+docker pull epasch/meshbot-weather:latest
 
 # Test it
-docker run --rm -it yourusername/meshbot-weather python -c "print('Docker Hub image works!')"
+docker run --rm -it epasch/meshbot-weather python -c "print('Docker Hub image works!')"
 ```
 
 ## Automated Updates
@@ -155,14 +155,14 @@ docker-compose up -d
 
 ```bash
 # Pull latest image
-docker pull yourusername/meshbot-weather:latest
+docker pull epasch/meshbot-weather:latest
 
 # Run container
 docker run -d \
   --name meshbot-weather \
   --restart unless-stopped \
   -v $(pwd)/settings.yaml:/app/settings.yaml:ro \
-  yourusername/meshbot-weather:latest
+  epasch/meshbot-weather:latest
 ```
 
 ### Using Docker Compose with Custom Image
@@ -171,7 +171,7 @@ docker run -d \
 # docker-compose.yml
 services:
   meshbot-weather:
-    image: yourusername/meshbot-weather:latest
+    image: epasch/meshbot-weather:latest
     container_name: meshbot-weather
     restart: unless-stopped
     volumes:
@@ -194,7 +194,7 @@ docker logs -f meshbot-weather
 
 ```bash
 # Pull latest image
-docker pull yourusername/meshbot-weather:latest
+docker pull epasch/meshbot-weather:latest
 
 # Restart container
 docker-compose down

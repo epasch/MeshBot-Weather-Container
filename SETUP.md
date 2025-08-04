@@ -12,8 +12,8 @@ This guide will walk you through setting up the MeshbotWeatherContainer for your
 ## Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/MeshbotWeatherContainer.git
-cd MeshbotWeatherContainer
+git clone git@github.com:epasch/MeshBot-Weather-Container.git
+cd MeshBot-Weather-Container
 ```
 
 ## Step 2: Initial Setup
