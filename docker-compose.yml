@@ -10,16 +10,21 @@ services:
       - ./settings.yaml:/app/settings.yaml:ro
       # Mount any logs directory if needed
       - ./logs:/app/logs
+      # Mount the device directory for USB access
+      - /dev:/dev:ro
     environment:
       - PYTHONUNBUFFERED=1
+      - MESHTASTIC_DEVICE=/dev/tty.usbmodem1101
+    privileged: true
     # If you need to connect to a Meshtastic device via USB
     # devices:
-    #   - "/dev/ttyUSB0:/dev/ttyUSB0"
+    #   - "/dev/tty.usbmodem1101:/dev/ttyUSB0"
     # If you need to connect to a Meshtastic device via network
-    # ports:
-    #   - "4403:4403"  # Meshtastic default port
-    networks:
-      - meshbot-network
+    ports:
+      - "4403:4403"  # Meshtastic default port
+    network_mode: host
+    # networks:
+    #   - meshbot-network
 
 networks:
   meshbot-network:
